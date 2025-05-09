@@ -1,0 +1,14 @@
+import pytest
+from chaos_monkey import ChaosMonkey
+
+class TestCommunication:
+    def __init__(self, source, destination, port, protocol):
+        self.chaos_monkey = ChaosMonkey(source, destination, port, protocol)
+
+    def test_disable_communication(self):
+        self.chaos_monkey.disable_communication()
+        assert not self.chaos_monkey.verify_communication(), "Communication should be disabled"
+
+    def test_enable_communication(self):
+        self.chaos_monkey.enable_communication()
+        assert self.chaos_monkey.verify_communication(), "Communication should be enabled"
